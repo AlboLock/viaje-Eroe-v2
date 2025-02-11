@@ -2,11 +2,11 @@ let container = document.querySelector('.contenedor-principal');
 let anchoPers = 120;
 let altPers = 120;
 let personajes = [
-    {x: 0, y: 0},
-    {x: 0, y: 0},
-    {x: 0, y: 0},
-    {x: 0, y: 0}
-]
+    {name: 'scream', x: 0, y: 0},
+    {name: 'freddy', x: 0, y: 0},
+    {name: 'lecter', x: 0, y: 0},
+    {name: 'hell', x: 0, y: 0}
+];
 let personajeActivo;
 let isArrowUpPress = false;
 let isArrowDownPress = false;
@@ -14,10 +14,26 @@ let isArrowLeftPress = false;
 let isArrowRightPress = false;
 let intervalIdY;
 let intervalIdX;
+let delay = 0;
+let screamDelay = 25;
+let freddyDelay = 40;
+let lecterDelay = 50;
+let hellDelay = 60;
 
 document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje'))
         personajeActivo = document.getElementById(event.target.id);
+        switch (event.target.id){
+            case 'scream':
+                delay = screamDelay;
+                break;
+            case 'freddy':
+                delay = freddyDelay;
+            case 'hell':
+                delay = hellDelay;
+            case 'lecter':
+                delay = lecterDelay;
+        }
 })
 
 document.addEventListener('keydown', function(event){
@@ -29,7 +45,7 @@ document.addEventListener('keydown', function(event){
                     clearInterval(intervalIdY);
                 }
                 isArrowUpPress = true;
-                intervalIdY = setInterval(movimiento, 25, 'Up');
+                intervalIdY = setInterval(movimiento, delay, 'Up');
             }
             break;
         case 'ArrowDown':
@@ -39,7 +55,7 @@ document.addEventListener('keydown', function(event){
                     clearInterval(intervalIdY);
                 }
                 isArrowDownPress = true;
-                intervalIdY = setInterval(movimiento, 25, 'Down');
+                intervalIdY = setInterval(movimiento, delay, 'Down');
             }
             break;
         case 'ArrowLeft':
@@ -49,7 +65,7 @@ document.addEventListener('keydown', function(event){
                     clearInterval(intervalIdX);
                 }
                 isArrowLeftPress = true;
-                intervalIdX = setInterval(movimiento, 25, 'Left');
+                intervalIdX = setInterval(movimiento, delay, 'Left');
             }
             break;
             
@@ -60,7 +76,7 @@ document.addEventListener('keydown', function(event){
                     clearInterval(intervalIdX);
                 }
                 isArrowRightPress = true;
-                intervalIdX = setInterval(movimiento, 25, 'Right');
+                intervalIdX = setInterval(movimiento, delay, 'Right');
             }
             break;
     }
@@ -98,13 +114,26 @@ document.addEventListener('keyup', function(event){
 function getRandomPositions() {
     let yPantalla = container.clientHeight;
     let xPantalla = container.clientWidth;
-    for (let i=0; i<personajes.length; i++){
-        let randomX = Math.random() * (xPantalla - anchoPers);
-        let randomY = Math.random() * (yPantalla - altPers);
+    for (let i = 0; i < personajes.length; i++) {
+        let randomX;
+        let randomY;
+        let overlap;
+        do {
+            randomX = Math.random() * (xPantalla - anchoPers);
+            randomY = Math.random() * (yPantalla - altPers);
+            overlap = false;
+            for (let j = 0; j < i; j++) {
+                let other = personajes[j];
+                if (Math.abs(randomX - other.x) < anchoPers && Math.abs(randomY - other.y) < altPers) {
+                    overlap = true;
+                    break;
+                }
+            }
+        } while (overlap);
         personajes[i].x = randomX;
         personajes[i].y = randomY;
     }
-    console.log(personajes)
+    console.log(personajes);
 }
 
 function spawnPersonajes(){
@@ -112,7 +141,7 @@ function spawnPersonajes(){
     for (let i=0; i<personajes.length; i++){
         const div = document.createElement('div');
         div.classList.add('personaje');
-        div.id = i;
+        div.id = personajes[i].name;
         div.style.left = personajes[i].x + 'px';
         div.style.top = personajes[i].y + 'px';
         div.style.backgroundImage = `url(img/c${i}.gif)`
