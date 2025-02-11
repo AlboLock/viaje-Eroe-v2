@@ -1,8 +1,6 @@
 let container = document.querySelector('.contenedor-principal');
 let anchoPers = 50;
 let altPers = 50;
-let yPantalla = container.clientHeight;
-let xPantalla = container.clientWidth;
 let personajes = [
     {x: 0, y: 0},
     {x: 0, y: 0},
@@ -34,25 +32,15 @@ document.addEventListener('keydown', function(event){
 })
 
 function getRandomPositions() {
+    let yPantalla = container.clientHeight;
+    let xPantalla = container.clientWidth;
     for (let i=0; i<personajes.length; i++){
         let randomX = Math.random() * (xPantalla - anchoPers);
         let randomY = Math.random() * (yPantalla - altPers);
-        let isOverlapping = false;
-        for (let j=0; j<i; j++){
-            let distance = Math.sqrt(Math.pow(randomX - personajes[j].x, 2) + Math.pow(randomY - personajes[j].y, 2));
-            if (distance < (anchoPers + 10)) {
-                isOverlapping = true;
-                break;
-            }
-        }
-        if (!isOverlapping){
-            personajes[i].x = randomX;
-            personajes[i].y = randomY;
-        } else {
-            i--;
-        }
+        personajes[i].x = randomX;
+        personajes[i].y = randomY;
     }
-    console.log(personajes);
+    console.log(personajes)
 }
 
 function spawnPersonajes(){
