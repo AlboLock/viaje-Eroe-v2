@@ -8,6 +8,8 @@ let personajes = [
     {x: 0, y: 0}
 ]
 let personajeActivo;
+let isMoving = false;
+let intervalsIds = [];
 
 document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje'))
@@ -15,19 +17,34 @@ document.addEventListener('click', function(event){
 })
 
 document.addEventListener('keydown', function(event){
-    switch (event.key){
-        case 'ArrowUp':
-            movimiento('Up');
-            break;
-        case 'ArrowDown':
-            movimiento('Down');
-            break;
-        case 'ArrowLeft':
-            movimiento('Left');
-            break;
-        case 'ArrowRight':
-            movimiento('Right');
-            break;
+    let intervalId;
+    if (!isMoving){
+        isMoving = true;
+        switch (event.key) {
+            case 'ArrowUp':
+                intervalId = setInterval(movimiento, 25, 'Up');
+                intervalsIds.push(intervalId);
+                break;
+            case 'ArrowDown':
+                intervalId = setInterval(movimiento, 25, 'Down');
+                intervalsIds.push(intervalId);
+                break;
+            case 'ArrowLeft':
+                intervalId = setInterval(movimiento, 25, 'Left');
+                intervalsIds.push(intervalId);
+                break;
+            case 'ArrowRight':
+                intervalId = setInterval(movimiento, 25, 'Right');
+                intervalsIds.push(intervalId);
+                break;
+        }
+    }
+})
+
+document.addEventListener('keyup', function(event){
+    isMoving = false;
+    for (let i=0; i<intervalsIds.length; i++){
+        clearInterval(intervalsIds[i]);
     }
 })
 
