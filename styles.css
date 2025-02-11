@@ -1,0 +1,12 @@
+.contenedor-principal{
+    position: relative;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.personaje{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+}
