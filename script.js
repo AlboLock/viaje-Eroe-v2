@@ -51,6 +51,7 @@ function spawnPersonajes(){
         div.id = i;
         div.style.left = personajes[i].x + 'px';
         div.style.top = personajes[i].y + 'px';
+        div.style.backgroundImage = `url(img/c${i}.gif)`
         container.appendChild(div);
     }
 }
