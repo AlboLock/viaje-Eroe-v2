@@ -2,7 +2,7 @@ let container = document.querySelector('.contenedor-principal');
 let anchoPers = 120;
 let altPers = 120;
 let personajes = [
-    {name: 'scream', x: 0, y: 0},
+    {name: 'scream', x: 0, y: 0,},
     {name: 'freddy', x: 0, y: 0},
     {name: 'lecter', x: 0, y: 0},
     {name: 'hell', x: 0, y: 0}
@@ -20,9 +20,11 @@ let freddyDelay = 40;
 let lecterDelay = 50;
 let hellDelay = 60;
 
+
 document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje'))
         personajeActivo = document.getElementById(event.target.id);
+      /* let cambio=personajeActivo.classList.add("personajeAct");*/
         switch (event.target.id){
             case 'scream':
                 delay = screamDelay;
@@ -137,7 +139,7 @@ function getRandomPositions() {
 }
 
 function spawnPersonajes(){
-    container.innerHTML = '';
+    /*container.innerHTML = '';*/
     for (let i=0; i<personajes.length; i++){
         const div = document.createElement('div');
         div.classList.add('personaje');
