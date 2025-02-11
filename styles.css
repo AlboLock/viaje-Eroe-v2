@@ -8,5 +8,9 @@
     justify-content: center;
 }
 #inicio{
-    background-image: url('');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('bgini.jpg');
+    width:100%;
 }
