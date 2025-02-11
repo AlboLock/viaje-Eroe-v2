@@ -8,8 +8,12 @@ let personajes = [
     {x: 0, y: 0}
 ]
 let personajeActivo;
-let isMoving = false;
-let intervalsIds = [];
+let isArrowUpPress = false;
+let isArrowDownPress = false;
+let isArrowLeftPress = false;
+let isArrowRightPress = false;
+let intervalIdY;
+let intervalIdX;
 
 document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje'))
@@ -17,34 +21,72 @@ document.addEventListener('click', function(event){
 })
 
 document.addEventListener('keydown', function(event){
-    let intervalId;
-    if (!isMoving){
-        isMoving = true;
-        switch (event.key) {
-            case 'ArrowUp':
-                intervalId = setInterval(movimiento, 25, 'Up');
-                intervalsIds.push(intervalId);
+    switch (event.key) {
+        case 'ArrowUp':
+            if (!isArrowUpPress){
+                if (isArrowDownPress){
+                    isArrowDownPress = false;
+                    clearInterval(intervalIdY);
+                }
+                intervalIdY = setInterval(movimiento, 25, 'Up');
+                isArrowUpPress = true;
                 break;
-            case 'ArrowDown':
-                intervalId = setInterval(movimiento, 25, 'Down');
-                intervalsIds.push(intervalId);
+            }
+        case 'ArrowDown':
+            if (!isArrowDownPress){
+                if (isArrowUpPress){
+                    isArrowUpPress = false;
+                    clearInterval(intervalIdY);
+                }
+                intervalIdY = setInterval(movimiento, 25, 'Down');
+                isArrowDownPress = true;
                 break;
-            case 'ArrowLeft':
-                intervalId = setInterval(movimiento, 25, 'Left');
-                intervalsIds.push(intervalId);
+            }
+        case 'ArrowLeft':
+            if (!isArrowLeftPress){
+                if (isArrowRightPress){
+                    isArrowRightPress = false;
+                    clearInterval(intervalIdX);
+                }
+                intervalIdX = setInterval(movimiento, 25, 'Left');
+                isArrowLeftPress = true;
                 break;
-            case 'ArrowRight':
-                intervalId = setInterval(movimiento, 25, 'Right');
-                intervalsIds.push(intervalId);
+            }
+            
+        case 'ArrowRight':
+            if (!isArrowRightPress){
+                if (isArrowLeftPress){
+                    isArrowLeftPress = false;
+                    clearInterval(intervalIdX);
+                }
+                intervalIdX = setInterval(movimiento, 25, 'Right');
+                isArrowRightPress = true;
                 break;
-        }
+            }
     }
 })
 
 document.addEventListener('keyup', function(event){
-    isMoving = false;
-    for (let i=0; i<intervalsIds.length; i++){
-        clearInterval(intervalsIds[i]);
+    switch (event.key) {
+        case 'ArrowUp':
+            isArrowUpPress = false;
+            clearInterval(intervalIdY);
+            break;
+            
+        case 'ArrowDown':
+            isArrowDownPress = false;
+            clearInterval(intervalIdY);
+            break;
+            
+        case 'ArrowLeft':
+            isArrowLeftPress = false;
+            clearInterval(intervalIdX);
+            break;
+
+        case 'ArrowRight':
+            isArrowRightPress = false;
+            clearInterval(intervalIdX);
+            break;
     }
 })
 
