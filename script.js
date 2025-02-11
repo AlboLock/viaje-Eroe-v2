@@ -28,30 +28,30 @@ document.addEventListener('keydown', function(event){
                     isArrowDownPress = false;
                     clearInterval(intervalIdY);
                 }
-                intervalIdY = setInterval(movimiento, 25, 'Up');
                 isArrowUpPress = true;
-                break;
+                intervalIdY = setInterval(movimiento, 25, 'Up');
             }
+            break;
         case 'ArrowDown':
             if (!isArrowDownPress){
                 if (isArrowUpPress){
                     isArrowUpPress = false;
                     clearInterval(intervalIdY);
                 }
-                intervalIdY = setInterval(movimiento, 25, 'Down');
                 isArrowDownPress = true;
-                break;
+                intervalIdY = setInterval(movimiento, 25, 'Down');
             }
+            break;
         case 'ArrowLeft':
             if (!isArrowLeftPress){
                 if (isArrowRightPress){
                     isArrowRightPress = false;
                     clearInterval(intervalIdX);
                 }
-                intervalIdX = setInterval(movimiento, 25, 'Left');
                 isArrowLeftPress = true;
-                break;
+                intervalIdX = setInterval(movimiento, 25, 'Left');
             }
+            break;
             
         case 'ArrowRight':
             if (!isArrowRightPress){
@@ -59,33 +59,38 @@ document.addEventListener('keydown', function(event){
                     isArrowLeftPress = false;
                     clearInterval(intervalIdX);
                 }
-                intervalIdX = setInterval(movimiento, 25, 'Right');
                 isArrowRightPress = true;
-                break;
+                intervalIdX = setInterval(movimiento, 25, 'Right');
             }
+            break;
     }
 })
 
 document.addEventListener('keyup', function(event){
     switch (event.key) {
         case 'ArrowUp':
-            isArrowUpPress = false;
-            clearInterval(intervalIdY);
+            if (isArrowUpPress){
+                isArrowUpPress = false;
+                clearInterval(intervalIdY);
+            }
             break;
-            
         case 'ArrowDown':
-            isArrowDownPress = false;
-            clearInterval(intervalIdY);
+            if (isArrowDownPress){
+                isArrowDownPress = false;
+                clearInterval(intervalIdY);
+            }
             break;
-            
         case 'ArrowLeft':
-            isArrowLeftPress = false;
-            clearInterval(intervalIdX);
+            if (isArrowLeftPress){
+                isArrowLeftPress = false;
+                clearInterval(intervalIdX);
+            }
             break;
-
         case 'ArrowRight':
-            isArrowRightPress = false;
-            clearInterval(intervalIdX);
+            if (isArrowRightPress){
+                isArrowRightPress = false;
+                clearInterval(intervalIdX);
+            }
             break;
     }
 })
