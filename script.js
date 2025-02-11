@@ -87,3 +87,7 @@ function movimiento(direccion){
     personajeActivo.style.top = posicionYActual + 'px';
     personajeActivo.style.left = posicionXActual + 'px';
 }
+function start() {
+    document.getElementById('inicio').style.display = 'none';
+    document.getElementById('bk').style.display = 'block';
+}
