@@ -2,8 +2,8 @@ let container = document.querySelector('.contenedor-principal');
 let errorContainer = document.querySelector('.mensaje-error');
 let yPantalla = window.innerHeight;
 let xPantalla = window.innerWidth;
-let anchoPers = 72;
-let altPers = 120;
+let anchoPers = 54;
+let altPers = 90;
 
 let statsScream = [];
 statsScream.x = 0;
