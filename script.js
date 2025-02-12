@@ -14,7 +14,7 @@ let isArrowLeftPress = false;
 let isArrowRightPress = false;
 let intervalIdY;
 let intervalIdX;
-let delay = 0;
+let delay = 25;
 let screamDelay = 25;
 let freddyDelay = 40;
 let lecterDelay = 50;
@@ -22,10 +22,13 @@ let hellDelay = 60;
 
 
 document.addEventListener('click', function(event){
-    if (event.target.classList.contains('personaje'))
-        personajeActivo = document.getElementById(event.target.id);
-      /* let cambio=personajeActivo.classList.add("personajeAct");*/
-        switch (event.target.id){
+    if (event.target.classList.contains('personaje')){
+        if (event.target.id != personajeActivo.id){
+            personajeActivo.classList.remove('personajeAct');
+            event.target.classList.add('personajeAct');
+            personajeActivo = document.getElementById(event.target.id);
+        }
+        switch (personajeActivo.id) {
             case 'scream':
                 delay = screamDelay;
                 break;
@@ -36,6 +39,7 @@ document.addEventListener('click', function(event){
             case 'lecter':
                 delay = lecterDelay;
         }
+    }
 })
 
 document.addEventListener('keydown', function(event){
@@ -161,6 +165,10 @@ function spawnPersonaje(){
                 div.style.left = personajes[i].x + 'px';
                 div.style.top = personajes[i].y + 'px';
                 div.style.backgroundImage = `url(img/c${i}.gif)`
+                if (i == 0) {
+                    personajeActivo = div;
+                    div.classList.add('personajeAct');
+                }
                 container.appendChild(div);
                 personajes[i].spawned = true;
                 break;
