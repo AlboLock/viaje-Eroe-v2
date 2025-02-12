@@ -64,6 +64,13 @@ body{
     transform: translateX(300px);
     transition-delay:0.5s;
 }
+.dot{
+    display: flex;
+    justify-content: end;
+    width: 15px;
+    height: 15px;
+    margin-left: 303px;
+}
 audio{
     padding-top: 20px;
 }
