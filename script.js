@@ -49,8 +49,67 @@ let freddyDelay = 40;
 let lecterDelay = 50;
 let hellDelay = 60;
 
+document.addEventListener('click', function(event) {
+    contenedorFrase.style.display='block';
 
-document.addEventListener('click', function(event){
+    if (event.target.classList.contains('personaje')) {
+        if (event.target.id !== personajeActivo.id) {
+            personajeActivo.classList.remove('personajeAct');
+            personajeStp();
+            event.target.classList.add('personajeAct');
+            personajeActivo = document.getElementById(event.target.id);
+            personajeA();
+            frasesHechas = []; // Reiniciar frases al cambiar de personaje
+        }
+        lanzarFrase(); // Mostrar frase al hacer clic en el personaje
+        actualizarPosicionFrase(); // Posicionar la frase correctamente
+    }
+
+    switch (personajeActivo.id) {
+        case 'scream':
+            delay = screamDelay;
+            break;
+        case 'freddy':
+            delay = freddyDelay;
+            break;
+        case 'hell':
+            delay = hellDelay;
+            break;
+        case 'lecter':
+            delay = lecterDelay;
+            break;
+    }
+});
+
+// Posiciona la frase cerca del personaje activo
+function actualizarPosicionFrase() {
+    let rect = personajeActivo.getBoundingClientRect();
+    contenedorFrase.style.position = "absolute";
+    contenedorFrase.style.left = `${rect.left + window.scrollX}px`;
+    contenedorFrase.style.top = `${rect.top + window.scrollY - 30}px`; // 30px arriba del personaje
+    contenedorFrase.style.background = "rgba(0, 0, 0, 0.7)";
+    contenedorFrase.style.color = "white";
+    contenedorFrase.style.padding = "5px 10px";
+    contenedorFrase.style.borderRadius = "5px";
+    contenedorFrase.style.fontSize = "14px";
+}
+
+// Modificación de la función lanzarFrase para evitar duplicados inmediatos
+function lanzarFrase() {
+    if (frasesHechas.length === frases.length) {
+        frasesHechas = [];
+    }
+
+    let fraseAleatoria;
+    do {
+        fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    } while (frasesHechas.includes(fraseAleatoria) && frasesHechas.length < frases.length);
+
+    frasesHechas.push(fraseAleatoria);
+    contenedorFrase.textContent = fraseAleatoria;
+}
+
+/*document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje')){
         if (event.target.id != personajeActivo.id){
             personajeActivo.classList.remove('personajeAct');
@@ -74,9 +133,10 @@ document.addEventListener('click', function(event){
                 break;
         }
     }
-})
+})*/
 
 document.addEventListener('keydown', function(event){
+    contenedorFrase.style.display='none';
     switch (event.key) {
         case 'ArrowUp':
             if (!isArrowUpPress){
@@ -202,16 +262,21 @@ function movimiento(direccion){
             if (posicionYActual > 0)
                 posicionYActual -= distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
+                contenedorFrase.style.display='none';
             break;
         case 'Down':
             if (posicionYActual + distancia <= yPantalla - altPers)
                 posicionYActual += distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
+                contenedorFrase.style.display='none';
+
             break;
         case 'Left':
             if (posicionXActual > 0)
                 posicionXActual -= distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
+                contenedorFrase.style.display='none';
+
                 personajeIz();
 
             break;
@@ -219,6 +284,7 @@ function movimiento(direccion){
             if (posicionXActual + distancia <= xPantalla - anchoPers)
                 posicionXActual += distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
+                contenedorFrase.style.display='none';
                 personajeA();
             break;
     }
@@ -304,3 +370,45 @@ function r3() {
 function mute(){
     audio.pause();
 }
+
+let frases = [
+    "No estás solo",
+    "Corre… mientras puedas",
+    "¿Oíste eso?",
+    "Algo me sigue...",
+    "No mires atrás",
+    "Está aquí...",
+    "Siento frío...",
+    "Esto no es real...",
+    "No puedo escapar",
+    "Susurros… los oyes?",
+    "Alguien me observa...",
+    "Las sombras se mueven",
+    "No cierres los ojos.",
+    "La puerta se cerró sola",
+    "La sangre sigue fresca...",
+    "¿Quién ríe en la oscuridad?",
+    "Me encontraron...",
+    "Esto no debería estar aquí.",
+    "La salida desapareció",
+    "Demasiado tarde..."
+];
+
+let frasesHechas = [];
+let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
+document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
+
+function lanzarFrase() {
+    if (frasesHechas.length === frases.length) {
+        frasesHechas = []; // Si ya se mostraron todas, reiniciamos
+    }
+
+    let fraseAleatoria;
+    do {
+        fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    } while (frasesHechas.includes(fraseAleatoria)); // Evita repetir hasta que se agoten
+
+    frasesHechas.push(fraseAleatoria);
+    contenedorFrase.textContent = fraseAleatoria; // Muestra la frase en pantalla
+}
+
