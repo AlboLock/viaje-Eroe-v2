@@ -226,7 +226,7 @@ function movimiento(direccion){
 function start() {
     document.getElementById('inicio').style.display = 'none';
     document.getElementById('bk').style.display = 'block';
-    document.getElementById("audioC").play();
+    r1();
     spawnPersonaje();
 }
 

@@ -88,6 +88,7 @@ h1{
     margin-bottom: 50px;
     color: rgb(255, 0, 0);
     font-weight: 200;
+    font-size: 50px;
 }
 h2{
     text-align: center;
@@ -100,7 +101,10 @@ h2{
     justify-content: center;
     align-items: center;
 }
-
+.generar{
+    width: 80%;
+    height: 50px;
+}
 button{
     transition: 0.13s ease;
     background-color: rgb(255, 0, 0); 
@@ -152,7 +156,7 @@ button:hover:active{
 }
 
 .mensaje-error{
-    color: red;
+    color: white;
     display: none;
     padding: 20px;
     border-radius: 1em;
