@@ -1,4 +1,5 @@
 let container = document.querySelector('.contenedor-principal');
+let errorContainer = document.querySelector('.mensaje-error');
 let anchoPers = 120;
 let altPers = 120;
 let personajes = [
@@ -173,7 +174,8 @@ function spawnPersonaje(){
                 personajes[i].spawned = true;
                 break;
             } else {
-                alert('Personaje overlap');
+                errorContainer.style.display = 'flex';
+                document.getElementById('mensajeError').innerHTML = 'Personaje solapado, inténtalo de nuevo'
                 return;
             }
         }
