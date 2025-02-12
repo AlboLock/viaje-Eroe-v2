@@ -1,6 +1,8 @@
 let container = document.querySelector('.contenedor-principal');
 let errorContainer = document.querySelector('.mensaje-error');
-let anchoPers = 120;
+let yPantalla = window.innerHeight;
+let xPantalla = window.innerWidth;
+let anchoPers = 72;
 let altPers = 120;
 
 let statsScream = [];
@@ -145,8 +147,6 @@ document.addEventListener('keyup', function(event){
 })
 
 function getRandomPositions() {
-    let yPantalla = container.clientHeight;
-    let xPantalla = container.clientWidth;
     for (let i = 0; i < personajes.length; i++) {
         let randomX;
         let randomY;
@@ -191,7 +191,7 @@ function spawnPersonaje(){
                 div.id = personajes[i].name;
                 div.style.left = personajes[i].x + 'px';
                 div.style.top = personajes[i].y + 'px';
-                div.style.backgroundImage = `url(img/c${i}.gif)`
+                div.style.backgroundImage = `url(GIf/c${i}stp.png)`
                 if (i == 0) {
                     personajeActivo = div;
                     div.classList.add('personajeAct');
@@ -210,23 +210,31 @@ function spawnPersonaje(){
 
 function movimiento(direccion){
     let posicionYActual = parseFloat(personajeActivo.style.top);
+    console.log(posicionYActual)
     let posicionXActual = parseFloat(personajeActivo.style.left);
+    let distancia = 5
     switch (direccion){
         case 'Up':
-        posicionYActual -= 5;
-        break;
+            if (posicionYActual > 0)
+                posicionYActual -= distancia;
+                personajeActivo.style.top = posicionYActual + 'px';
+            break;
         case 'Down':
-        posicionYActual += 5;
-        break;
+            if (posicionYActual + distancia <= yPantalla - altPers)
+                posicionYActual += distancia;
+                personajeActivo.style.top = posicionYActual + 'px';
+            break;
         case 'Left':
-        posicionXActual -= 5;
-        break;
+            if (posicionXActual > 0)
+                posicionXActual -= distancia;
+                personajeActivo.style.left = posicionXActual + 'px';
+            break;
         case 'Right':
-        posicionXActual += 5;
-        break;
+            if (posicionXActual + distancia <= xPantalla - anchoPers)
+                posicionXActual += distancia;
+                personajeActivo.style.left = posicionXActual + 'px';
+            break;
     }
-    personajeActivo.style.top = posicionYActual + 'px';
-    personajeActivo.style.left = posicionXActual + 'px';
 }
 function start() {
     document.getElementById('inicio').style.display = 'none';
