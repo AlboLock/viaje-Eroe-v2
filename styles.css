@@ -137,7 +137,6 @@ button:hover:active{
     padding: 20px;
     border-radius: 1em;
     z-index: 1;
-    display: flex;
     position: absolute;
     left: 50%;
     top: 50%;
