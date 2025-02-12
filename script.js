@@ -181,3 +181,11 @@ function start() {
     getRandomPositions();
     spawnPersonaje();
 }
+
+function cambiarFondo(){
+document.querySelector('.contenedor-principal').style.backgroundImage="url('img/bg01.png')";
+}
+
+function cambiarFondo2(){
+document.querySelector('.contenedor-principal').style.backgroundImage = "url('img/bg2.png')";
+}
