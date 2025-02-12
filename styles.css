@@ -33,6 +33,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.1s ease-in-out;
+    filter: drop-shadow(0px 0px 1px rgb(255, 255, 255));
 }
 .personaje:hover{
     transform: scale(1.2);
@@ -78,7 +79,7 @@ audio{
     padding-top: 20px;
 }
 audio:hover{
-    filter: drop-shadow(0px 0px 8px rgba(255, 0, 0, 0.822));
+    filter: drop-shadow(0px 0px 8px rgb(255, 0, 0));
 
 }
 h1{

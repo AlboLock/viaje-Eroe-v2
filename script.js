@@ -196,6 +196,7 @@ function movimiento(direccion){
     console.log(posicionYActual)
     let posicionXActual = parseFloat(personajeActivo.style.left);
     let distancia = 5
+    
     switch (direccion){
         case 'Up':
             if (posicionYActual > 0)
@@ -211,11 +212,14 @@ function movimiento(direccion){
             if (posicionXActual > 0)
                 posicionXActual -= distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
+                personajeIz();
+
             break;
         case 'Right':
             if (posicionXActual + distancia <= xPantalla - anchoPers)
                 posicionXActual += distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
+                personajeA();
             break;
     }
 }
@@ -262,5 +266,21 @@ function personajeStp(){
         break;
         case 'hell':
             personajeActivo.style.backgroundImage="url(GIf/c3stp.png)"
+    }
+}
+
+function personajeIz(){
+    switch (personajeActivo.id){
+        case 'scream': 
+        personajeActivo.style.backgroundImage="url(GIf/c0i.gif)";
+        break;
+        case 'freddy':
+            personajeActivo.style.backgroundImage="url(GIf/c1i.gif)";
+        break;
+        case 'lecter':
+            personajeActivo.style.backgroundImage="url(GIf/c2i.gif)"
+        break;
+        case 'hell':
+            personajeActivo.style.backgroundImage="url(GIf/c3i.gif)"
     }
 }
