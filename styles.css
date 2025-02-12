@@ -12,9 +12,6 @@ body{
     cursor: pointer;
     transition: 0.2s ease-in-out;
 }
-.botonstart:hover{
-    transform: scale(1.05);
-}
 .botonstart:active{
     transform: scale(0.9);
 }
