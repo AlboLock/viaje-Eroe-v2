@@ -9,6 +9,14 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: 0.5 ease-in-out;
+}
+.botonstart:hover{
+    transform: scale(1.1);
+}
+.botonstart:active{
+    transform: scale(0.9);
 }
 #inicio{
     display: flex;
