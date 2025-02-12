@@ -2,10 +2,10 @@ let container = document.querySelector('.contenedor-principal');
 let anchoPers = 120;
 let altPers = 120;
 let personajes = [
-    {name: 'scream', x: 0, y: 0,},
-    {name: 'freddy', x: 0, y: 0},
-    {name: 'lecter', x: 0, y: 0},
-    {name: 'hell', x: 0, y: 0}
+    {name: 'scream', x: 0, y: 0, spawned: false},
+    {name: 'freddy', x: 0, y: 0, spawned: false},
+    {name: 'lecter', x: 0, y: 0, spawned: false},
+    {name: 'hell', x: 0, y: 0, spawned: false}
 ];
 let personajeActivo;
 let isArrowUpPress = false;
@@ -138,16 +138,19 @@ function getRandomPositions() {
     console.log(personajes);
 }
 
-function spawnPersonajes(){
-    /*container.innerHTML = '';*/
+function spawnPersonaje(){
     for (let i=0; i<personajes.length; i++){
-        const div = document.createElement('div');
-        div.classList.add('personaje');
-        div.id = personajes[i].name;
-        div.style.left = personajes[i].x + 'px';
-        div.style.top = personajes[i].y + 'px';
-        div.style.backgroundImage = `url(img/c${i}.gif)`
-        container.appendChild(div);
+        if (personajes[i].spawned == false){
+            const div = document.createElement('div');
+            div.classList.add('personaje');
+            div.id = personajes[i].name;
+            div.style.left = personajes[i].x + 'px';
+            div.style.top = personajes[i].y + 'px';
+            div.style.backgroundImage = `url(img/c${i}.gif)`
+            container.appendChild(div);
+            personajes[i].spawned = true;
+            break;
+        }
     }
 }
 
@@ -175,5 +178,5 @@ function start() {
     document.getElementById('inicio').style.display = 'none';
     document.getElementById('bk').style.display = 'block';
     getRandomPositions();
-    spawnPersonajes();
+    spawnPersonaje()
 }
