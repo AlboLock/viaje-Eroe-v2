@@ -54,8 +54,10 @@ document.addEventListener('click', function(event){
     if (event.target.classList.contains('personaje')){
         if (event.target.id != personajeActivo.id){
             personajeActivo.classList.remove('personajeAct');
+            personajeStp();
             event.target.classList.add('personajeAct');
             personajeActivo = document.getElementById(event.target.id);
+            personajeA();
         }
         switch (personajeActivo.id) {
             case 'scream':
@@ -63,10 +65,13 @@ document.addEventListener('click', function(event){
                 break;
             case 'freddy':
                 delay = freddyDelay;
+                break;
             case 'hell':
                 delay = hellDelay;
+                break;
             case 'lecter':
                 delay = lecterDelay;
+                break;
         }
     }
 })
@@ -146,29 +151,6 @@ document.addEventListener('keyup', function(event){
     }
 })
 
-function getRandomPositions() {
-    for (let i = 0; i < personajes.length; i++) {
-        let randomX;
-        let randomY;
-        let overlap;
-        do {
-            randomX = Math.random() * (xPantalla - anchoPers);
-            randomY = Math.random() * (yPantalla - altPers);
-            overlap = false;
-            for (let j = 0; j < i; j++) {
-                let other = personajes[j];
-                if (Math.abs(randomX - other.x) < anchoPers && Math.abs(randomY - other.y) < altPers) {
-                    overlap = true;
-                    break;
-                }
-            }
-        } while (overlap);
-        personajes[i].x = randomX;
-        personajes[i].y = randomY;
-    }
-    console.log(personajes);
-}
-
 function spawnPersonaje(){
     let yPantalla = container.clientHeight;
     let xPantalla = container.clientWidth;
@@ -195,6 +177,7 @@ function spawnPersonaje(){
                 if (i == 0) {
                     personajeActivo = div;
                     div.classList.add('personajeAct');
+                    personajeA();
                 }
                 container.appendChild(div);
                 personajes[i].spawned = true;
@@ -239,7 +222,7 @@ function movimiento(direccion){
 function start() {
     document.getElementById('inicio').style.display = 'none';
     document.getElementById('bk').style.display = 'block';
-    getRandomPositions();
+    document.getElementById("audioC").play();
     spawnPersonaje();
 }
 
@@ -249,4 +232,35 @@ document.querySelector('.contenedor-principal').style.backgroundImage="url('img/
 
 function cambiarFondo2(){
 document.querySelector('.contenedor-principal').style.backgroundImage = "url('img/bg2.png')";
+}
+
+function personajeA(){
+    switch (personajeActivo.id){
+        case 'scream': 
+        personajeActivo.style.backgroundImage="url(GIf/c0.gif)";
+        break;
+        case 'freddy':
+            personajeActivo.style.backgroundImage="url(GIf/c1.gif)";
+        break;
+        case 'lecter':
+            personajeActivo.style.backgroundImage="url(GIf/c2.gif)"
+        break;
+        case 'hell':
+            personajeActivo.style.backgroundImage="url(GIf/c3.gif)"
+    }
+}
+function personajeStp(){
+    switch (personajeActivo.id){
+        case 'scream': 
+        personajeActivo.style.backgroundImage="url(GIf/c0stp.png)";
+        break;
+        case 'freddy':
+            personajeActivo.style.backgroundImage="url(GIf/c1stp.png)";
+        break;
+        case 'lecter':
+            personajeActivo.style.backgroundImage="url(GIf/c2stp.png)"
+        break;
+        case 'hell':
+            personajeActivo.style.backgroundImage="url(GIf/c3stp.png)"
+    }
 }
