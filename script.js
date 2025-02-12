@@ -139,19 +139,36 @@ function getRandomPositions() {
 }
 
 function spawnPersonaje(){
+    let yPantalla = container.clientHeight;
+    let xPantalla = container.clientWidth;
     for (let i=0; i<personajes.length; i++){
         if (personajes[i].spawned == false){
-            const div = document.createElement('div');
-            div.classList.add('personaje');
-            div.id = personajes[i].name;
-            div.style.left = personajes[i].x + 'px';
-            div.style.top = personajes[i].y + 'px';
-            div.style.backgroundImage = `url(img/c${i}.gif)`
-            container.appendChild(div);
-            personajes[i].spawned = true;
-            break;
+            let randomX = Math.random() * (xPantalla - anchoPers);
+            let randomY = Math.random() * (yPantalla - altPers);
+            let overlap = false;
+            for (let j=0; j<i; j++) {
+                if (Math.abs(randomX - personajes[j].x) < anchoPers && Math.abs(randomY - personajes[j].y) < altPers) {
+                    overlap = true;
+                    break;
+                }
+            }
+            if (!overlap){
+                personajes[i].x = randomX;
+                personajes[i].y = randomY;
+                const div = document.createElement('div');
+                div.classList.add('personaje');
+                div.id = personajes[i].name;
+                div.style.left = personajes[i].x + 'px';
+                div.style.top = personajes[i].y + 'px';
+                div.style.backgroundImage = `url(img/c${i}.gif)`
+                container.appendChild(div);
+                personajes[i].spawned = true;
+                break;
+            } else {
+                alert('Personaje overlap');
+                return;
+            }
         }
-        
     }
 }
 
