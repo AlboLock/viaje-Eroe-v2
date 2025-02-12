@@ -301,3 +301,6 @@ function r3() {
     audio.src = 'img/xfiles.mp3';
     audio.play();
 }
+function mute(){
+    audio.pause();
+}
