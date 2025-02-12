@@ -284,3 +284,20 @@ function personajeIz(){
             personajeActivo.style.backgroundImage="url(GIf/c3i.gif)"
     }
 }
+let audio = document.getElementById('audio');
+
+function r1() {
+    audio.pause();
+    audio.src = 'img/helloween.mp3';
+    audio.play();
+}
+function r2() {
+    audio.pause();
+    audio.src = 'img/psycho.mp3';
+    audio.play();
+}
+function r3() {
+    audio.pause();
+    audio.src = 'img/xfiles.mp3';
+    audio.play();
+}
