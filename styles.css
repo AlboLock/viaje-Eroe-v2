@@ -84,6 +84,12 @@ h2{
     color: rgb(192, 192, 192);
     font-weight: 150;
 }
+.boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
 button{
     transition: 0.13s ease;
     background-color: rgb(255, 0, 0); 
@@ -91,7 +97,6 @@ button{
     border-color: #00000000; 
     border-radius: 7px;
     height: 30px;
-    width: 50px; 
     color: white;
 }
 button:hover{ 
