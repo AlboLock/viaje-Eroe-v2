@@ -2,12 +2,38 @@ let container = document.querySelector('.contenedor-principal');
 let errorContainer = document.querySelector('.mensaje-error');
 let anchoPers = 120;
 let altPers = 120;
+
+let statsScream = [];
+statsScream.x = 0;
+statsScream.y = 0;
+statsScream.spawned = false;
+statsScream.name = 'scream';
+
+let statsFreddy = [];
+statsFreddy.x = 0;
+statsFreddy.y = 0;
+statsFreddy.spawned = false;
+statsFreddy.name = 'freddy';
+
+let statsLecter = [];
+statsLecter.x = 0;
+statsLecter.y = 0;
+statsLecter.spawned = false;
+statsLecter.name = 'lecter';
+
+let statsHell = [];
+statsHell.x = 0;
+statsHell.y = 0;
+statsHell.spawned = false;
+statsHell.name = 'hell';
+
 let personajes = [
-    {name: 'scream', x: 0, y: 0, spawned: false},
-    {name: 'freddy', x: 0, y: 0, spawned: false},
-    {name: 'lecter', x: 0, y: 0, spawned: false},
-    {name: 'hell', x: 0, y: 0, spawned: false}
+    statsScream,
+    statsFreddy,
+    statsLecter,
+    statsHell
 ];
+
 let personajeActivo;
 let isArrowUpPress = false;
 let isArrowDownPress = false;
