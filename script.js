@@ -75,8 +75,6 @@ let frases = [
 let frasesTemp = frases.slice();
 
 document.addEventListener('click', function(event) {
-    
-
     if (event.target.classList.contains('personaje')) {
         if (event.target.id !== personajeActivo.id) {
             personajeActivo.classList.remove('personajeAct');
