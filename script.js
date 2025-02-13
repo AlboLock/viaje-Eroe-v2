@@ -106,6 +106,8 @@ document.addEventListener('click', function(event) {
     }
 });
 
+let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
+document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
 // Posiciona la frase cerca del personaje activo
 function actualizarPosicionFrase() {
     let rect = personajeActivo.getBoundingClientRect();
@@ -120,8 +122,7 @@ function actualizarPosicionFrase() {
 }
 
 
-let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
-document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
+
 
 // Modificación de la función lanzarFrase para evitar duplicados inmediatos
 function lanzarFrase() {
