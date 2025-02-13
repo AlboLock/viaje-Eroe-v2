@@ -136,7 +136,7 @@ function lanzarFrase() {
                 fraseAleatoria = frasesTemp[randomNumb];
                 frasesTemp.splice(randomNumb, 1);
             } else {
-                fraseAleatoria = 'No tengo nada que decir'
+                fraseAleatoria = 'Déjame en paz...'
             }
         }
     }
@@ -284,7 +284,7 @@ function movimiento(direccion){
                 updateCoordenadas()
             break;
         case 'Down':
-            if (posicionYActual + distancia <= yPantalla - altPers -20)
+            if (posicionYActual + distancia <= yPantalla - altPers -15)
                 posicionYActual += distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
                 contenedorFrase.style.display='none';
@@ -301,7 +301,7 @@ function movimiento(direccion){
 
             break;
         case 'Right':
-            if (posicionXActual + distancia <= xPantalla - anchoPers - 20)
+            if (posicionXActual + distancia <= xPantalla - anchoPers - 15)
                 posicionXActual += distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
                 contenedorFrase.style.display='none';
