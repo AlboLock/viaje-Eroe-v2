@@ -75,7 +75,7 @@ let frases = [
 let frasesTemp = frases.slice();
 
 document.addEventListener('click', function(event) {
-    contenedorFrase.style.display='block';
+    
 
     if (event.target.classList.contains('personaje')) {
         if (event.target.id !== personajeActivo.id) {
@@ -86,6 +86,7 @@ document.addEventListener('click', function(event) {
             personajeA();
             frasesTemp = frases.slice();
         }
+        contenedorFrase.style.display='block';
         lanzarFrase(); // Mostrar frase al hacer clic en el personaje
         actualizarPosicionFrase(); // Posicionar la frase correctamente
     }
@@ -120,9 +121,6 @@ function actualizarPosicionFrase() {
     contenedorFrase.style.borderRadius = "5px";
     contenedorFrase.style.fontSize = "14px";
 }
-
-
-
 
 // Modificación de la función lanzarFrase para evitar duplicados inmediatos
 function lanzarFrase() {
