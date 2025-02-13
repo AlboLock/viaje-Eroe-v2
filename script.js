@@ -72,6 +72,8 @@ let frases = [
     "Demasiado tarde..."
 ];
 
+let frasesTemp = frases.slice();
+
 document.addEventListener('click', function(event) {
     contenedorFrase.style.display='block';
 
@@ -82,7 +84,7 @@ document.addEventListener('click', function(event) {
             event.target.classList.add('personajeAct');
             personajeActivo = document.getElementById(event.target.id);
             personajeA();
-            frasesHechas = []; // Reiniciar frases al cambiar de personaje
+            frasesTemp = frases.slice();
         }
         lanzarFrase(); // Mostrar frase al hacer clic en el personaje
         actualizarPosicionFrase(); // Posicionar la frase correctamente
@@ -117,23 +119,38 @@ function actualizarPosicionFrase() {
     contenedorFrase.style.fontSize = "14px";
 }
 
-let frasesHechas = [];
+
 let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
 document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
 
 // Modificación de la función lanzarFrase para evitar duplicados inmediatos
 function lanzarFrase() {
-    if (frasesHechas.length === frases.length) {
-        frasesHechas = [];
+    let fraseAleatoria = '';
+    let nombre = personajeActivo.id;
+    let randomNumb;
+    for (let i=0; i<personajes.length; i++){
+        if (nombre == personajes[i].name){
+            if (frasesTemp.length != 0){
+                randomNumb = Math.floor(Math.random() * frasesTemp.length);
+                fraseAleatoria = frasesTemp[randomNumb];
+                frasesTemp.splice(randomNumb, 1);
+            } else {
+                fraseAleatoria = 'No tengo nada que decir'
+            }
+        }
     }
-
-    let fraseAleatoria;
-    do {
-        fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
-    } while (frasesHechas.includes(fraseAleatoria) && frasesHechas.length < frases.length);
-
-    frasesHechas.push(fraseAleatoria);
     contenedorFrase.textContent = fraseAleatoria;
+    // if (frasesHechas.length === frases.length) {
+    //     frasesHechas = [];
+    // }
+
+    // let fraseAleatoria;
+    // do {
+    //     fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    // } while (frasesHechas.includes(fraseAleatoria) && frasesHechas.length < frases.length);
+
+    // frasesHechas.push(fraseAleatoria);
+    // contenedorFrase.textContent = fraseAleatoria;
 }
 
 document.addEventListener('keydown', function(event){
