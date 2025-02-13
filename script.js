@@ -94,6 +94,10 @@ function actualizarPosicionFrase() {
     contenedorFrase.style.fontSize = "14px";
 }
 
+let frasesHechas = [];
+let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
+document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
+
 // Modificación de la función lanzarFrase para evitar duplicados inmediatos
 function lanzarFrase() {
     if (frasesHechas.length === frases.length) {
@@ -108,32 +112,6 @@ function lanzarFrase() {
     frasesHechas.push(fraseAleatoria);
     contenedorFrase.textContent = fraseAleatoria;
 }
-
-/*document.addEventListener('click', function(event){
-    if (event.target.classList.contains('personaje')){
-        if (event.target.id != personajeActivo.id){
-            personajeActivo.classList.remove('personajeAct');
-            personajeStp();
-            event.target.classList.add('personajeAct');
-            personajeActivo = document.getElementById(event.target.id);
-            personajeA();
-        }
-        switch (personajeActivo.id) {
-            case 'scream':
-                delay = screamDelay;
-                break;
-            case 'freddy':
-                delay = freddyDelay;
-                break;
-            case 'hell':
-                delay = hellDelay;
-                break;
-            case 'lecter':
-                delay = lecterDelay;
-                break;
-        }
-    }
-})*/
 
 document.addEventListener('keydown', function(event){
     contenedorFrase.style.display='none';
@@ -265,7 +243,7 @@ function movimiento(direccion){
                 contenedorFrase.style.display='none';
             break;
         case 'Down':
-            if (posicionYActual + distancia <= yPantalla - altPers)
+            if (posicionYActual + distancia <= yPantalla - altPers -20)
                 posicionYActual += distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
                 contenedorFrase.style.display='none';
@@ -281,13 +259,20 @@ function movimiento(direccion){
 
             break;
         case 'Right':
-            if (posicionXActual + distancia <= xPantalla - anchoPers)
+            if (posicionXActual + distancia <= xPantalla - anchoPers - 20)
                 posicionXActual += distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
                 contenedorFrase.style.display='none';
                 personajeA();
             break;
     }
+    for (let i=0; i<personajes.length; i++){
+        if (personajeActivo.id == personajes[i].name){
+            personajes[i].x = personajeActivo.style.left;
+            personajes[i].y = personajeActivo.style.top;
+        }
+    }
+    console.log(personajes)
 }
 function start() {
     document.getElementById('inicio').style.display = 'none';
@@ -393,22 +378,3 @@ let frases = [
     "La salida desapareció",
     "Demasiado tarde..."
 ];
-
-let frasesHechas = [];
-let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
-document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
-
-function lanzarFrase() {
-    if (frasesHechas.length === frases.length) {
-        frasesHechas = []; // Si ya se mostraron todas, reiniciamos
-    }
-
-    let fraseAleatoria;
-    do {
-        fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
-    } while (frasesHechas.includes(fraseAleatoria)); // Evita repetir hasta que se agoten
-
-    frasesHechas.push(fraseAleatoria);
-    contenedorFrase.textContent = fraseAleatoria; // Muestra la frase en pantalla
-}
-
