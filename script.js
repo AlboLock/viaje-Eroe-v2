@@ -241,12 +241,14 @@ function movimiento(direccion){
                 posicionYActual -= distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
                 contenedorFrase.style.display='none';
+                updateCoordenadas()
             break;
         case 'Down':
             if (posicionYActual + distancia <= yPantalla - altPers -20)
                 posicionYActual += distancia;
                 personajeActivo.style.top = posicionYActual + 'px';
                 contenedorFrase.style.display='none';
+                updateCoordenadas()
 
             break;
         case 'Left':
@@ -254,7 +256,7 @@ function movimiento(direccion){
                 posicionXActual -= distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
                 contenedorFrase.style.display='none';
-
+                updateCoordenadas()
                 personajeIz();
 
             break;
@@ -263,17 +265,22 @@ function movimiento(direccion){
                 posicionXActual += distancia;
                 personajeActivo.style.left = posicionXActual + 'px';
                 contenedorFrase.style.display='none';
+                updateCoordenadas()
                 personajeA();
             break;
     }
-    for (let i=0; i<personajes.length; i++){
-        if (personajeActivo.id == personajes[i].name){
+    console.log(personajes)
+}
+
+function updateCoordenadas(){
+    for (let i = 0; i < personajes.length; i++) {
+        if (personajeActivo.id == personajes[i].name) {
             personajes[i].x = personajeActivo.style.left;
             personajes[i].y = personajeActivo.style.top;
         }
     }
-    console.log(personajes)
 }
+
 function start() {
     document.getElementById('inicio').style.display = 'none';
     document.getElementById('bk').style.display = 'block';
