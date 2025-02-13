@@ -49,6 +49,29 @@ let freddyDelay = 40;
 let lecterDelay = 50;
 let hellDelay = 60;
 
+let frases = [
+    "No estás solo",
+    "Corre… mientras puedas",
+    "¿Oíste eso?",
+    "Algo me sigue...",
+    "No mires atrás",
+    "Está aquí...",
+    "Siento frío...",
+    "Esto no es real...",
+    "No puedo escapar",
+    "Susurros… los oyes?",
+    "Alguien me observa...",
+    "Las sombras se mueven",
+    "No cierres los ojos.",
+    "La puerta se cerró sola",
+    "La sangre sigue fresca...",
+    "¿Quién ríe en la oscuridad?",
+    "Me encontraron...",
+    "Esto no debería estar aquí.",
+    "La salida desapareció",
+    "Demasiado tarde..."
+];
+
 document.addEventListener('click', function(event) {
     contenedorFrase.style.display='block';
 
@@ -360,26 +383,3 @@ function r3() {
 function mute(){
     audio.pause();
 }
-
-let frases = [
-    "No estás solo",
-    "Corre… mientras puedas",
-    "¿Oíste eso?",
-    "Algo me sigue...",
-    "No mires atrás",
-    "Está aquí...",
-    "Siento frío...",
-    "Esto no es real...",
-    "No puedo escapar",
-    "Susurros… los oyes?",
-    "Alguien me observa...",
-    "Las sombras se mueven",
-    "No cierres los ojos.",
-    "La puerta se cerró sola",
-    "La sangre sigue fresca...",
-    "¿Quién ríe en la oscuridad?",
-    "Me encontraron...",
-    "Esto no debería estar aquí.",
-    "La salida desapareció",
-    "Demasiado tarde..."
-];
