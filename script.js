@@ -85,8 +85,8 @@ document.addEventListener('click', function(event) {
             frasesTemp = frases.slice();
         }
         contenedorFrase.style.display='block';
-        lanzarFrase(); // Mostrar frase al hacer clic en el personaje
-        actualizarPosicionFrase(); // Posicionar la frase correctamente
+        lanzarFrase();
+        actualizarPosicionFrase(); 
     }
 
     switch (personajeActivo.id) {
@@ -105,22 +105,20 @@ document.addEventListener('click', function(event) {
     }
 });
 
-let contenedorFrase = document.createElement("div"); // Crear un contenedor para las frases
-document.body.appendChild(contenedorFrase); // Agregarlo al cuerpo de la página
-// Posiciona la frase cerca del personaje activo
+let contenedorFrase = document.createElement("div"); 
+document.body.appendChild(contenedorFrase); 
+
 function actualizarPosicionFrase() {
     let rect = personajeActivo.getBoundingClientRect();
     contenedorFrase.style.position = "absolute";
     contenedorFrase.style.left = `${rect.left + window.scrollX}px`;
-    contenedorFrase.style.top = `${rect.top + window.scrollY - 30}px`; // 30px arriba del personaje
+    contenedorFrase.style.top = `${rect.top + window.scrollY - 30}px`; 
     contenedorFrase.style.background = "rgba(0, 0, 0, 0.7)";
     contenedorFrase.style.color = "white";
     contenedorFrase.style.padding = "5px 10px";
     contenedorFrase.style.borderRadius = "5px";
     contenedorFrase.style.fontSize = "14px";
 }
-
-// Modificación de la función lanzarFrase para evitar duplicados inmediatos
 function lanzarFrase() {
     let fraseAleatoria = '';
     let nombre = personajeActivo.id;
@@ -137,17 +135,6 @@ function lanzarFrase() {
         }
     }
     contenedorFrase.textContent = fraseAleatoria;
-    // if (frasesHechas.length === frases.length) {
-    //     frasesHechas = [];
-    // }
-
-    // let fraseAleatoria;
-    // do {
-    //     fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
-    // } while (frasesHechas.includes(fraseAleatoria) && frasesHechas.length < frases.length);
-
-    // frasesHechas.push(fraseAleatoria);
-    // contenedorFrase.textContent = fraseAleatoria;
 }
 
 document.addEventListener('keydown', function(event){
