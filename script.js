@@ -268,45 +268,59 @@ function spawnPersonaje(){
             }
         }
     }
+    console.log(personajes)
 }
 
 function movimiento(direccion){
     let posicionYActual = parseFloat(personajeActivo.style.top);
     let posicionXActual = parseFloat(personajeActivo.style.left);
     let distancia = 5
-    
+    let xFutura = posicionXActual;
+    let YFutura = posicionYActual;
     switch (direccion){
         case 'Up':
-            if (posicionYActual > 0)
-                posicionYActual -= distancia;
-                personajeActivo.style.top = posicionYActual + 'px';
-                contenedorFrase.style.display='none';
-                updateCoordenadas()
+            YFutura -= distancia;
+            if (YFutura > 0){
+                if (!detectarColision(xFutura, YFutura)) {
+                    personajeActivo.style.top = YFutura + 'px';
+                    contenedorFrase.style.display = 'none';
+                    updateCoordenadas();
+                }
+            }
             break;
         case 'Down':
-            if (posicionYActual + distancia <= yPantalla - altPers -15)
-                posicionYActual += distancia;
-                personajeActivo.style.top = posicionYActual + 'px';
-                contenedorFrase.style.display='none';
-                updateCoordenadas()
-
+            YFutura += distancia;
+            if (YFutura + altPers <= yPantalla - 25){
+                if (!detectarColision(xFutura, YFutura)) {
+                    personajeActivo.style.top = YFutura + 'px';
+                    contenedorFrase.style.display = 'none';
+                    updateCoordenadas();
+                }
+            }
+                
             break;
         case 'Left':
-            if (posicionXActual > 0)
-                posicionXActual -= distancia;
-                personajeActivo.style.left = posicionXActual + 'px';
-                contenedorFrase.style.display='none';
-                updateCoordenadas()
-                personajeIz();
-
+            xFutura -= distancia;
+            if (xFutura > 0){
+                if (!detectarColision(xFutura, YFutura)) {
+                    personajeActivo.style.left = xFutura + 'px';
+                    contenedorFrase.style.display = 'none';
+                    updateCoordenadas();
+                    personajeIz();
+                }
+            }
+                
             break;
         case 'Right':
-            if (posicionXActual + distancia <= xPantalla - anchoPers - 15)
-                posicionXActual += distancia;
-                personajeActivo.style.left = posicionXActual + 'px';
-                contenedorFrase.style.display='none';
-                updateCoordenadas()
-                personajeA();
+            xFutura += distancia;
+            if (xFutura + anchoPers <= xPantalla - 25) {
+                if (!detectarColision(xFutura, YFutura)) {
+                    personajeActivo.style.left = xFutura + 'px';
+                    contenedorFrase.style.display = 'none';
+                    updateCoordenadas();
+                    personajeA();
+                }
+            }
             break;
     }
 }
@@ -314,8 +328,8 @@ function movimiento(direccion){
 function updateCoordenadas(){
     for (let i = 0; i < personajes.length; i++) {
         if (personajeActivo.id == personajes[i].name) {
-            personajes[i].x = personajeActivo.style.left;
-            personajes[i].y = personajeActivo.style.top;
+            personajes[i].x = parseFloat(personajeActivo.style.left);
+            personajes[i].y = parseFloat(personajeActivo.style.top);
         }
     }
 }
@@ -400,4 +414,15 @@ function r3() {
 }
 function mute(){
     audio.pause();
+}
+
+function detectarColision(persActX, persActY){
+    for (let i=0; i<personajes.length; i++){
+        if (personajeActivo.id != personajes[i].name){
+            if (Math.abs(persActX - personajes[i].x) < anchoPers && Math.abs(persActY - personajes[i].y) < altPers) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
