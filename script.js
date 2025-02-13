@@ -231,7 +231,6 @@ function spawnPersonaje(){
 
 function movimiento(direccion){
     let posicionYActual = parseFloat(personajeActivo.style.top);
-    console.log(posicionYActual)
     let posicionXActual = parseFloat(personajeActivo.style.left);
     let distancia = 5
     
@@ -269,7 +268,6 @@ function movimiento(direccion){
                 personajeA();
             break;
     }
-    console.log(personajes)
 }
 
 function updateCoordenadas(){
